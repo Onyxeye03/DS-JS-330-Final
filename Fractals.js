@@ -21,7 +21,7 @@ gl.viewport(0, 0, canvas.width, canvas.height);
         // Load the data into the GPU
         var bufferId = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
-        gl.bufferData(gl.ARRAY_BUFFER, flatten(positions), gl.STATIC_DRAW);
+        //gl.bufferData(gl.ARRAY_BUFFER, flatten(positions), gl.STATIC_DRAW);
         gl.bufferData(gl.ARRAY_BUFFER, 8 * Math.pow(3, 6), gl.STATIC_DRAW);
 // Associate out shader variables with our data buffer
         var positionLoc = gl.getAttribLocation(program, "aPosition");
