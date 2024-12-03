@@ -61,25 +61,25 @@ gl.viewport(0, 0, canvas.width, canvas.height);
         }
     }
     function render() {
-        //var vertices=[
-        //vec2( -1.00 , 0.00 ),
-        //vec2( -0.33 , 0.00 ),
-        //vec2( -0.33 , 0.00 ),
-        //vec2( 0.00 , 0.00 ),
-        //vec2( 0.00 , 0.00 ),
-        //vec2( 0.33 , 0.00 ),
-        //vec2( 0.33 , 0.00 ),
-        //vec2( 1.00 , 0.00 )
-        //];
+        var vertices=[
+        vec2( -1.00 , 0.00 ),
+        vec2( -0.33 , 0.00 ),
+        vec2( -0.33 , 0.00 ),
+        vec2( 0.00 , 0.00 ),
+        vec2( 0.00 , 0.00 ),
+        vec2( 0.33 , 0.00 ),
+        vec2( 0.33 , 0.00 ),
+        vec2( 1.00 , 0.00 )
+        ];
         positions = [];
-        //positions.push( vertices[0] );
-        //positions.push( vertices[1] );
-        //positions.push( vertices[2] );
-        //positions.push( vertices[3] );
-        //positions.push( vertices[4] );
-        //positions.push( vertices[5] );
-        //positions.push( vertices[6] );
-        //positions.push( vertices[7] );
+        positions.push( vertices[0] );
+        positions.push( vertices[1] );
+        positions.push( vertices[2] );
+        positions.push( vertices[3] );
+        positions.push( vertices[4] );
+        positions.push( vertices[5] );
+        positions.push( vertices[6] );
+        positions.push( vertices[7] );
         var left = vec2(-1.0, 0.0);
         var right = vec2(1.0, 0.0);
         divFlake(left, right, numTimesToSubdivide);
