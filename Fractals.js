@@ -10,36 +10,26 @@ function init() {
         "gl-canvas");
     gl = canvas.getContext('webgl2');
     if (!gl) {
-        alert("WebGL isn't
-available" ); }
+        alert("WebGL isn'tavailable" ); }
 //
 // Configure WebGL
 //
 gl.viewport(0, 0, canvas.width,
             canvas.height);
         gl.clearColor(1.0, 1.0, 1.0, 1.0);
-// Load shaders and initialize
-attribute buffers
+// Load shaders and initialize attribute buffers
         var program = initShaders(gl,
-            "vertex-shader", "fragment-shader");
-        gl.useProgram(program);
+            "vertex-shader", "fragment-shader"); gl.useProgram(program);
         // Load the data into the GPU
         var bufferId = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER,
-            bufferId);
+        gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
         //gl.bufferData( gl.ARRAY_BUFFER,
         flatten(positions), gl.STATIC_DRAW );
-        gl.bufferData(gl.ARRAY_BUFFER,
-            8 * Math.pow(3, 6), gl.STATIC_DRAW);
-// Associate out shader variables with
-our data buffer
-        var positionLoc =
-            gl.getAttribLocation(program, "aPosition"
-            );
-        gl.vertexAttribPointer(positionLoc,
-            2, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(
-            positionLoc);
+        gl.bufferData(gl.ARRAY_BUFFER, 8 * Math.pow(3, 6), gl.STATIC_DRAW);
+// Associate out shader variables with our data buffer
+        var positionLoc = gl.getAttribLocation(program, "aPosition");
+        gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(positionLoc);
         document.getElementById("slider").onchange
             = function (event) {
                 numTimesToSubdivide =
