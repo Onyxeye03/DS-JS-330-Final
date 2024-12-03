@@ -18,8 +18,7 @@ gl.viewport(0, 0, canvas.width,
             canvas.height);
         gl.clearColor(1.0, 1.0, 1.0, 1.0);
 // Load shaders and initialize attribute buffers
-        var program = initShaders(gl,
-            "vertex-shader", "fragment-shader"); gl.useProgram(program);
+        var program = initShaders(gl, vertex-shader", "fragment-shader"); gl.useProgram(program);
         // Load the data into the GPU
         var bufferId = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
@@ -50,11 +49,9 @@ gl.viewport(0, 0, canvas.width,
             positions.push(pos2);
             positions.push(right);
         } else {
-            // calc top and make sure it is a
-            vec2
+            // calc top and make sure it is a vec2 
             var len = pos2[0] - pos1[0];
-            var top = vec2(pos1[0] + len / 2,
-                len * sqrt3d2);
+            var top = vec2(pos1[0] + len / 2, len * sqrt3d2);
             positions.push(pos1);
             positions.push(top);
             positions.push(top);
@@ -89,10 +86,8 @@ gl.viewport(0, 0, canvas.width,
         var right = vec2(1.0, 0.0);
         divFlake(left, right, numTimesToSubdivide);
         //divFlake(left,right,1);
-        gl.bufferSubData(gl.ARRAY_BUFFER, 0,
-            flatten(positions));
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(positions));
         gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.LINES, 0,
-            positions.length);
+        gl.drawArrays(gl.LINES, 0, positions.length);
         positions = [];
     }
