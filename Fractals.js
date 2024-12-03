@@ -6,8 +6,7 @@ var numTimesToSubdivide = 0;
 var bufferId;
 init();
 function init() {
-    var canvas = document.getElementById(
-        "gl-canvas");
+    var canvas = document.getElementById("gl-canvas");
     gl = canvas.getContext('webgl2');
     if (!gl) {
         alert("WebGL isn'tavailable" ); }
