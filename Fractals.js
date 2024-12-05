@@ -35,57 +35,40 @@ gl.viewport(0, 0, canvas.width, canvas.height);
             };
         render();
     };
-    function divFlake(left, right, count) {
-        var sqrt3d2 = 0.87;
-        var pos1 = mix(left, right, 0.33);
-        var pos2 = mix(left, right, 0.67);
-        if (count == 0) {
-            positions.push(left);
-            positions.push(pos1);
-            positions.push(pos1);
-            positions.push(pos2);
-            positions.push(pos2);
-            positions.push(right);
-        } else {
-            // calc top and make sure it is a vec2 
-            var len = pos2[0] - pos1[0];
-            var top = vec2(pos1[0] + len / 2, len * sqrt3d2);
-            positions.push(pos1);
-            positions.push(top);
-            positions.push(top);
-            positions.push(pos2);
-            --count;
-            // divide the left and right
-            divFlake(left, pos1, count);
-            divFlake(pos2, right, count);
-        }
+function divFlake(left, right, count) {
+    var sqrt3d2 = Math.sqrt(3) / 2;
+    var mid = mix(left, right, 0.5); // Midpoint of the side
+
+    if (count == 0) {
+        positions.push(left);
+        positions.push(mid);
+        positions.push(right);
+    } else {
+        var top = vec2(mid[0], mid[1] + sqrt3d2 * (right[1] - left[1])); // Top point using midpoint formula
+        positions.push(mid);
+        positions.push(top);
+        positions.push(top);
+        positions.push(right);
+        --count;
+        divFlake(left, mid, count);
+        divFlake(mid, right, count);
     }
-    function render() {
-        var vertices=[
-        vec2( -1.00 , 0.00 ),
-        vec2( -0.33 , 0.00 ),
-        vec2( -0.33 , 0.00 ),
-        vec2( 0.00 , 0.00 ),
-        vec2( 0.00 , 0.00 ),
-        vec2( 0.33 , 0.00 ),
-        vec2( 0.33 , 0.00 ),
-        vec2( 1.00 , 0.00 )
-        ];
-        positions = [];
-        positions.push( vertices[0] );
-        positions.push( vertices[1] );
-        positions.push( vertices[2] );
-        positions.push( vertices[3] );
-        positions.push( vertices[4] );
-        positions.push( vertices[5] );
-        positions.push( vertices[6] );
-        positions.push( vertices[7] );
-        var left = vec2(-1.0, 0.0);
-        var right = vec2(1.0, 0.0);
-        divFlake(left, right, numTimesToSubdivide);
-        //divFlake(left,right,1);
-        gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(positions));
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.LINES, 0, positions.length);
-        positions = [];
-    }
+}
+function render() {
+    var vertices = [
+        vec2(-1.0, 0.0),
+        vec2(0.0, Math.sqrt(3) / 2),
+        vec2(1.0, 0.0)
+    ];
+    positions = [];
+    positions.push(vertices[0]);
+    positions.push(vertices[1]);
+    positions.push(vertices[2]);
+    var left = vec2(-1.0, 0.0);
+    var right = vec2(1.0, 0.0);
+    divFlake(left, right, numTimesToSubdivide);
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(positions));
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, positions.length);
+    positions = [];
+}
