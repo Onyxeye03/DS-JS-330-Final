@@ -4,6 +4,31 @@ var gl;
 var positions;
 var numTimesToSubdivide = 0;
 var bufferId;
+var texture; //for texture
+
+// perpendicular texture w/isoceles triangle
+/*
+var texCoord = [
+    vec2(0.5, 0),
+    vec2(0  , 1),
+    vec2(1  , 1)
+];*/
+
+//setting up texture and configuring into the GPU
+function configureTexture( image ) {
+    texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB,
+         gl.RGB, gl.UNSIGNED_BYTE, image);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,
+                      gl.NEAREST_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+    gl.uniform1i(gl.getUniformLocation(program, "uTextureMap"), 0);
+}
+
+
 init();
 function init() {
     var canvas = document.getElementById("gl-canvas");
@@ -33,6 +58,18 @@ gl.viewport(0, 0, canvas.width, canvas.height);
                     parseInt(event.target.value);
                 render();
             };
+
+    //texture buffers
+    var tBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
+    var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
+    gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(texCoordLoc);
+
+    var image = document.getElementById("texImage");
+    configureTexture(image);
+    //---
         render();
     };
 function divFlake(left, right, count) {
