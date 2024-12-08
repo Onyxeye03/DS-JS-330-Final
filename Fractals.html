@@ -28,9 +28,14 @@ Oops ... your browser doesn't support the HTML5 canvas element
           type="x-shader/x-vertex">
       #version 300 es
       in vec4 aPosition;
+      in vec2 aTexCoord; //added
+
+      out vec2 vTexCoord;
+    
       void
       main()
       {
+      vTexCoord = aTexCoord;
       gl_PointSize = 4.0;
       gl_Position = aPosition;
       }
