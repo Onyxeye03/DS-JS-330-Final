@@ -35,6 +35,13 @@ function init() {
     gl = canvas.getContext('webgl2');
     if (!gl) {
         alert("WebGL isn'tavailable" ); }
+//Tiragle testing
+        var vertices = [
+        vec2(  0.00 ,  1.00),
+        vec2( -0.87 , -0.50),
+        vec2(  0.87 , -0.50)
+    ];
+    
 //
 // Configure WebGL
 //
@@ -71,6 +78,25 @@ gl.viewport(0, 0, canvas.width, canvas.height);
     configureTexture(image);
     //---
         render();
+//1, 2, 3 change code:
+        window.onkeydown = function(event) {
+        var key = String.fromCharCode(event.keyCode);
+        switch(key) {
+          case '1':
+            color= vec4(1,0, 0.5, 0.0, 1.0);//IDK what color this is. ~(._.)~
+            break;
+
+          case '2':
+            color = vec4(1.0, 0.0, 0.0, 1.0);
+            break;
+
+          case '3':
+            color = vec4(0.0, 1.0, 0.0, 1.0);
+            break;
+        }
+    };
+    render();
+    
     };
 function divFlake(left, right, count) {
     var sqrt3d2 = Math.sqrt(3) / 2;
