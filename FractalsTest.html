@@ -3,10 +3,13 @@
     <script type="text/javascript" src="Common\gl-matrix.js"></script>
     <script type="text/javascript" src="Common\gl-matrix-min.js"></script>
     <script type="text/javascript" src="Common\initShaders.js"></script>
+    <script src="https://raw.githubusercontent.com/kmindi/webgl-utils.js/refs/heads/master/webgl-utils.js"></script>
     <script type="text/javascript" src="Common\MVnew.js"></script>
     <script type="text/javascript" src="Common\utility.js"></script>
 </head>
 <body>
+    
+    <script type="text/javascript" src="FractalsTest.js"></script>
     <style>
         input {
             text-align: center;
@@ -14,20 +17,8 @@
     </style>
 
     <h1>A Sierpinski Gasket With Triangles</h1>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <canvas id="myCanvas"></canvas>
     <input type="number" id="DepthBox" min="0" max="10" value="0">
-    <script>
-        const modelMatrix = glMatrix.mat4.create();
-        const canvas = document.getElementById('myCanvas');
-        const gl = canvas.getContext('webgl');
-        if (!gl) {
-            console.error("Unable to initialize WebGL. Your browser or machine may not support it.");
-            alert("WebGL is not supported in this browser."); //Better user feedback.
-        };
-        window.addEventListener("load", function (event) {
-            document.getElementById('DepthBox').value = GetDepth();
-        });
-    </script>
     <p>
         Depth
         <input type="text"
@@ -61,7 +52,7 @@
             gl_FragColor = f_Color;
         }
     </script>
-    <script type="text/javascript" src="Fractals.js"></script>
+
     <img id="texImage" src="Common/Carpet.jpg" hidden>
 </body>
 </html>
